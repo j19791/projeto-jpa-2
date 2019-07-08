@@ -59,6 +59,9 @@ public class ProdutoDao {
 		query.where((Predicate[]) predicates.toArray(new Predicate[0]));//array de predicados p/ buscar os produtos
 
 		TypedQuery<Produto> typedQuery = em.createQuery(query);
+		
+		typedQuery.setHint("org.hibernate.cacheable", "true");//avisar ao Hibernate que queremos que ele salve no cache os resultados da query
+		
 		return typedQuery.getResultList();
 
 	}

@@ -5,7 +5,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 @Entity
+@Cache(usage=CacheConcurrencyStrategy.NONSTRICT_READ_WRITE) //habilitando cache de 2o. nivel p/ Produto e utilizando estratégia NONSTRICT_READ_WRITE: não há problemas em ler dados inconsistentes caso hajam alterações simultâneas.
 public class Loja {
 	
 	@Id

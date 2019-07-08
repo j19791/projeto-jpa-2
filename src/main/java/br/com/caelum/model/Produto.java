@@ -15,9 +15,12 @@ import javax.persistence.Version;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
+@Cache(usage=CacheConcurrencyStrategy.NONSTRICT_READ_WRITE) //habilitando cache de 2o. nivel p/ Produto e utilizando estratégia NONSTRICT_READ_WRITE: não há problemas em ler dados inconsistentes caso hajam alterações simultâneas. 
 public class Produto {
 
 	@Id
@@ -40,7 +43,7 @@ public class Produto {
 	@ManyToOne
 	private Loja loja;
 	
-
+	@Cache(usage=CacheConcurrencyStrategy.NONSTRICT_READ_WRITE) //CACHE DE COLEÇÕES (apenas ids)
 	@ManyToMany // os relacionamentos @*toMany são Lazy por default
 	private List<Categoria> categorias = new ArrayList<>();
 	
