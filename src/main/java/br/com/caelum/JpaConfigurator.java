@@ -37,7 +37,7 @@ public class JpaConfigurator {
 	    dataSource.setDriverClass("com.mysql.jdbc.Driver");
 	    dataSource.setJdbcUrl("jdbc:mysql://localhost/projeto_jpa");
 	    dataSource.setUser("root");
-	    dataSource.setPassword("pc1000");
+	    dataSource.setPassword("");
 	    
 	    dataSource.setMinPoolSize(3);//abrir uma certa quantidade de conexões para compartilharmos entre os clientes. número mínimo de conexões que devem ser criadas de antemão e que estarão esperando clientes. 
 	    
