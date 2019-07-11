@@ -15,6 +15,7 @@
 					<table class="table table-striped">
 						<thead>
 							<tr>
+								<th></th>
 								<th>Hit</th>
 								<th>Miss</th>
 								<th>Conexões</th>
@@ -23,12 +24,15 @@
 						<tbody>
 							<tr>
 								<td>Cache</td>
-								<!-- Hit -->
-								<td></td>
-								<!-- Miss -->
-								<td></td>
-								<! -- Conections -->
-								<td></td>
+								<!-- Hit: quantidade de queries encontradas no cache-->
+								
+								<td>${statistics.queryCacheHitCount}</td>
+								<!-- Miss: quantidade de queries não encontradas no cache (consulta direta no bd) -->
+								
+								<td>${statistics.queryCacheMissCount}</td>
+								<!-- Conections: quantidade de conexões pedidas pelo EntityManager. Usando um pool de conexões, retorna o min de configurado -->
+								
+								<td>${statistics.connectCount}</td>
 							</tr>
 						</tbody>
 					</table>

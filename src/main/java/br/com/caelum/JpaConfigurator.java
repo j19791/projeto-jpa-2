@@ -6,6 +6,8 @@ import java.util.Properties;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
+import org.hibernate.SessionFactory;
+import org.hibernate.stat.Statistics;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -73,6 +75,9 @@ public class JpaConfigurator {
 
         props.setProperty("hibernate.cache.use_query_cache", "true");//habilita cache de queries: armazenar em cache o resultado de uma query feita para determinados parâmetros
         
+        props.setProperty("hibernate.generate_statistics", "true");//habilita hibernate statistics: saber se os recursos empregados estão sendo utilizados corretamente, monitorar problemas de escalabilidade e performance. connection leak (conexão que ficou aberta),miss do cache
+        
+        
 		entityManagerFactory.setJpaProperties(props);
 		return entityManagerFactory;
 	}
@@ -85,4 +90,10 @@ public class JpaConfigurator {
 		return transactionManager;
 	}
 
+	
+	@Bean
+	public Statistics statistics(EntityManagerFactory emf) { 
+	    return emf.unwrap(SessionFactory.class).getStatistics();//pegar a instância de um objeto interno do Hibernate chamado SessionFactory (específica do Hibernate e não faz parte da JPA)
+	}
+	
 }
